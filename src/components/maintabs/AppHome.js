@@ -3,6 +3,7 @@ import { StyleSheet, TextInput } from 'react-native'
 import { View, Container, Content, Text, Footer, Button } from 'native-base';
 import AppHeader from '../common/AppHeader'
 import axios from 'axios';
+import { Actions } from 'react-native-router-flux';
 
 class AppHome extends Component {
   state={
@@ -11,7 +12,7 @@ class AppHome extends Component {
   }
 
   componentDidMount(){
-    axios.get('http://reduxblog.herokuapp.com/api/posts?key=products3')
+    axios.get("https://reduxblog.herokuapp.com/api/posts?key=products3")
     .then(res => {
         this.setState({
           products: res.data
@@ -20,7 +21,7 @@ class AppHome extends Component {
   }
 
   updateData(){
-    axios.get('http://reduxblog.herokuapp.com/api/posts?key=products3')
+    axios.get("https://reduxblog.herokuapp.com/api/posts?key=products3")
     .then(res => {
         this.setState({
           products: res.data
@@ -30,7 +31,7 @@ class AppHome extends Component {
 
   handleSubmit= event => {
     event.preventDefault()
-    axios.post('http://reduxblog.herokuapp.com/api/posts?key=products3',
+    axios.post("https://reduxblog.herokuapp.com/api/posts?key=products3",
     {
         title: this.state.title,
         categories: this.state.categories,
@@ -40,6 +41,7 @@ class AppHome extends Component {
     .then(res => {
       alert('article was added')
       this.updateData()
+        Actions.user()
     }
   )
   }

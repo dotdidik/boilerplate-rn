@@ -6,13 +6,13 @@ export default class AppHeader extends Component {
     return (
         <Header>
             <Left>
-            <Button transparent>
+            <Button transparent onPress={this.props.buttonLeft}>
                 <Icon name={this.props.icon} />
             </Button>
             </Left>
             <Body><Title>{this.props.title}</Title></Body>
             <Right>
-                <Button transparent>
+                <Button transparent onPress={this.props.buttonRight}>
                     <Icon name={this.props.right} />
                 </Button>
             </Right>
