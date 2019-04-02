@@ -4,46 +4,20 @@ import { View, Container, Content, Text, Footer, Button } from 'native-base';
 import AppHeader from '../common/AppHeader'
 import axios from 'axios';
 import { Actions } from 'react-native-router-flux';
+import AppCArd from '../common/AppCard';
 
 class AppHome extends Component {
   state={
-    products: [],
-    title:''
+    news: []
   }
 
   componentDidMount(){
-    axios.get("https://reduxblog.herokuapp.com/api/posts?key=products3")
+    axios.get("https://reduxblog.herokuapp.com/api/posts?key=newsrn")
     .then(res => {
         this.setState({
-          products: res.data
+          news: res.data
         })
     });
-  }
-
-  updateData(){
-    axios.get("https://reduxblog.herokuapp.com/api/posts?key=products3")
-    .then(res => {
-        this.setState({
-          products: res.data
-        })
-    });
-  }
-
-  handleSubmit= event => {
-    event.preventDefault()
-    axios.post("https://reduxblog.herokuapp.com/api/posts?key=products3",
-    {
-        title: this.state.title,
-        categories: this.state.categories,
-        content: this.state.content
-    }
-    )
-    .then(res => {
-      alert('article was added')
-      this.updateData()
-        Actions.user()
-    }
-  )
   }
 
   render() {
@@ -55,21 +29,16 @@ class AppHome extends Component {
             right= 'logo-google'
           />
           <Content>
-          <TextInput
-              style={{height: 40}}
-              placeholder="Type here to translate!"
-              onChangeText={(title) => this.setState({title})}
-            />
-            <Text style={styles.textBody}> {this.state.title}</Text>
-            <Button onPress={this.handleSubmit}><Text>Submit</Text></Button>
-
+          <Text> News </Text>
             {
-              this.state.products.map(prod=>
-                <View key={prod.id}>
-                  <Text>
-                    {prod.title}
-                  </Text>
-                </View>  
+              this.state.news.map((n, index)=>
+                <View key={index}>
+                  <AppCArd
+                    img={n.content}
+                    title={n.title}
+                    buttonPress= {() => Actions.rnwebview({nview : n}) } 
+                  />
+              </View>  
               )
             }
           </Content>

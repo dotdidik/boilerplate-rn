@@ -35,10 +35,10 @@ export default class AddUser extends Component {
         .then(res => {
           alert('article was added')
           this.updateData()
-            Actions.user()
+          Actions.user()
         }
       )
-      }
+    }
 
   render() {
     return (
